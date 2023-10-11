@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    name: lotto-ml-job-dev
+spec:
+    template:
+        spec:
+            containers:
+                - name: lotto-ml-dev
+                  image: lotto_ml:1.0.1_dev
+                  imagePullPolicy: IfNotPresent
+            restartPolicy: OnFailure

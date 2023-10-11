@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: lotto-ml-job
+spec:
+  schedule: "0 */6 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1 # 성공한 작업 중 마지막 1개만 유지
+  failedJobsHistoryLimit: 1 # 실패한 작업 중 마지막 1개만 유지
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: lotto-ml
+              image: lotto_ml:1.0.2
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
